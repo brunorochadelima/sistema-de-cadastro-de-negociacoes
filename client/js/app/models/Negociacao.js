@@ -25,4 +25,5 @@ class Negociacao {
   get valor() {
     return this.#valor
   }
+ 
 }
