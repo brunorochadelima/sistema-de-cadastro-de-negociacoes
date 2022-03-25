@@ -4,6 +4,8 @@ class NegociacaoController {
   #inputValor;
   #listaNegociacoes;
   #negociacoesView;
+  #mensagem;
+  #mensagemView;
 
   constructor() {
     let $ = document.querySelector.bind(document); // bind indica que o valor the this será document
@@ -15,6 +17,10 @@ class NegociacaoController {
     this.#listaNegociacoes = new ListaNegociacoes();
     this.#negociacoesView = new NegociacoesView($(".negociacaoView"));
     this.#negociacoesView.update(this.#listaNegociacoes)
+
+    this._mensagem = new Mensagem();
+    this.#mensagemView = new MensagemView($("#mensagemView"));
+    this.#mensagemView.update(this._mensagem);
   }
 
   _criaNegociacao() {
@@ -29,7 +35,10 @@ class NegociacaoController {
     event.preventDefault();
 
     this.#listaNegociacoes.adiciona(this._criaNegociacao());
+    this._mensagem.texto = 'Negociacao adicionada com sucesso';
     this.#negociacoesView.update(this.#listaNegociacoes)
+    this.#mensagemView.update(this._mensagem);
+
     this.limpa();
     console.log(this.#listaNegociacoes.negociacoes);
   }
